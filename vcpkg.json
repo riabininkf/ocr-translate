@@ -1,0 +1,19 @@
+{
+  "name": "translator",
+  "version": "0.1.0",
+  "dependencies": [
+    "cpr",
+    "curl",
+    "tesseract",
+    "leptonica",
+    "nlohmann-json",
+    "qhotkey",
+    {
+      "name": "qtbase",
+      "features": [
+        "widgets"
+      ]
+    }
+  ]
+}
+

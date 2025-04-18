@@ -1,0 +1,7 @@
+{
+  "name": "qhotkey",
+  "version-string": "1.5.0",
+  "description": "A global shortcut/hotkey for Desktop Qt-Applications.",
+  "homepage": "https://github.com/Skycoder42/QHotkey",
+  "dependencies": ["qtbase"]
+}

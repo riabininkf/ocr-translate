@@ -1,0 +1,9 @@
+{
+  "name": "tesseract",
+  "version-string": "5.5.0",
+  "description": " An OCR Engine that was developed at HP Labs (1985-1995) and Google (2006-2018)",
+  "homepage": "https://github.com/tesseract-ocr",
+  "dependencies": [
+    "leptonica"
+  ]
+}
