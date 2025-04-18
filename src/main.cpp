@@ -27,16 +27,16 @@ int main(int argc, char* argv[]) {
     QObject::connect(&trayIcon, SIGNAL(leftClicked()), &captureFrame, SLOT(onScreenCaptureStarted()));
     // QObject::connect(&hotkey, SIGNAL(activated()), &captureFrame, SLOT(onScreenCaptureStarted()));
 
-    QDir dir(QCoreApplication::applicationDirPath());
-
+    QDir tessDataDir(QApplication::applicationDirPath());
 #ifdef Q_OS_MAC
-    dir.cdUp();
-    dir.cd("Resources");
+    tessDataDir.cdUp();
+    tessDataDir.cd("Resources");
 #endif
 
-    dir.cd("tessdata");
+    tessDataDir.cd("tessdata");
 
-    const ocr::TesseractParser parser(static_cast<int>(screen->devicePixelRatio()), dir.absolutePath().toStdString());
+    const ocr::TesseractParser parser(static_cast<int>(screen->devicePixelRatio()),
+                                      tessDataDir.absolutePath().toStdString());
     connectScreenUpdated(*screen, parser, SLOT(onScreenUpdated()));
 
     const translation::GoogleTranslator translator;

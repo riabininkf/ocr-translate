@@ -5,26 +5,11 @@ VCPKG_OVERLAY_PORTS = ./vcpkg-overlay-ports
 TESSDATA_FOLDER = ./tessdata
 BUILD_DIR=./.build
 
-# must be set
-CMAKE_MAKE_PROGRAM ?=
-CMAKE_C_COMPILER ?=
-CMAKE_CXX_COMPILER ?=
-VCPKG_TOOLCHAIN_FILE ?=
-BUILD_SYSTEM_GENERATOR ?=
+.PHONY: build-osx-arm64 .build build-check-vars
 
-#		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
-#		-B ./.build/$(shell echo ${CMAKE_BUILD_TYPE} | tr '[:upper:]' '[:lower:]'); \
-
-
-
-.PHONY: build-debug build-release .build build-check-vars
-
-build-debug:
-	$(MAKE) .build CMAKE_BUILD_TYPE=Debug
-
-build-arm64-osx:
+build-osx-arm64:
 	@platform=arm64-osx; \
-	output_dir="${BUILD_DIR}/$$platform"; \
+	output_dir="${BUILD_DIR}/macos-arm64"; \
 	$(MAKE) .build VCPKG_TARGET_TRIPLET=$$platform OUTPUT_DIR=$$output_dir; \
 	mkdir -p $$output_dir/${APP_NAME}.app/Contents/Resources/tessdata; \
 	cp -r ${TESSDATA_FOLDER}/* $$output_dir/${APP_NAME}.app/Contents/Resources/tessdata
@@ -44,7 +29,6 @@ build-arm64-osx:
 		-B ${OUTPUT_DIR}
 
 build-check-vars:
-	@#if [ -z "${CMAKE_BUILD_TYPE}" ]; then echo "Missing CMAKE_BUILD_TYPE"; exit 1; fi
 	@if [ -z "${CMAKE_MAKE_PROGRAM}" ]; then echo "Missing CMAKE_MAKE_PROGRAM"; exit 1; fi
 	@if [ -z "${CMAKE_C_COMPILER}" ]; then echo "Missing CMAKE_C_COMPILER"; exit 1; fi
 	@if [ -z "${CMAKE_CXX_COMPILER}" ]; then echo "Missing CMAKE_CXX_COMPILER"; exit 1; fi
